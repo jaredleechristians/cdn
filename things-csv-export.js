@@ -39,43 +39,23 @@ function csv(device,keys){
                 
             });
 
-            if (keys == 'temp'){
-                var url = "https://things.sfigroup.co.za/api/plugins/telemetry/DEVICE/"+device+"/values/timeseries?keys="+keys+"&startTs=0&endTs="+now+"&interval=60000&agg=NONE&limit=50000";
-                $.get(url, function(data){
+            var url = "https://things.sfigroup.co.za/api/plugins/telemetry/DEVICE/"+device+"/values/timeseries?keys="+keys+"&startTs=0&endTs="+now+"&interval=60000&agg=NONE&limit=50000";
+            $.get(url, function(data){
 
-                    for (var key in data.temp){
-                        var date = new Date(data.temp[key].ts).toLocaleDateString("en-ZA");
-                        var time = new Date(data.temp[key].ts).toLocaleTimeString("en-ZA");
-                        //document.write('"'+name+'"'+";"+'"'+date + ' ' + time +'";"'+data.temp[key].value+'"'+"<br>");
-                        content += name+';'+data.temp[key].value+';'+date + ' ' + time+'\n';
-                    }
+                for (var key in data[keys]){
+                    var date = new Date(data[keys][key].ts).toLocaleDateString("en-ZA");
+                    var time = new Date(data[keys][key].ts).toLocaleTimeString("en-ZA");
+                    //document.write('"'+name+'"'+";"+'"'+date + ' ' + time +'";"'+data.temp[key].value+'"'+"<br>");
+                    content += name+';'+data[keys][key].value+';'+date + ' ' + time+'\n';
+                }
 
-                    var blob = new Blob([content], {
-                        type: "text/plain;charset=utf-8"
-                    });
-
-                    saveAs(blob, filename);
+                var blob = new Blob([content], {
+                    type: "text/plain;charset=utf-8"
                 });
-            }
+
+                saveAs(blob, filename);
+            });
             
-            if (keys == 'humid'){
-                var url = "https://things.sfigroup.co.za/api/plugins/telemetry/DEVICE/"+device+"/values/timeseries?keys="+keys+"&startTs=0&endTs="+now+"&interval=60000&agg=NONE&limit=50000";
-                $.get(url, function(data){
-
-                    for (var key in data.humid){
-                        var date = new Date(data.humid[key].ts).toLocaleDateString("en-ZA");
-                        var time = new Date(data.humid[key].ts).toLocaleTimeString("en-ZA");
-                        //document.write('"'+name+'"'+";"+'"'+date + ' ' + time +'";"'+data.humid[key].value+'"'+"<br>");
-                        content += name+';'+data.humid[key].value+';'+date + ' ' + time+'\n';
-                    }
-
-                    var blob = new Blob([content], {
-                        type: "text/plain;charset=utf-8"
-                    });
-
-                    saveAs(blob, filename);
-                });
-            }
         }
 
     }
