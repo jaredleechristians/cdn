@@ -17,7 +17,7 @@ function csv(device,keys){
     xhr.setRequestHeader("Accept", "application/json");
 
     // Send the requst with Data
-    xhr.send('{"username":"jared@sfigroup.co.za", "password":"SfiJc001$"}');
+    xhr.send('{"username":"jared@sfigroup.co.za", "password":"SfiJc001#"}');
 
     xhr.onreadystatechange = function() {
         // 	Check if request is completed
