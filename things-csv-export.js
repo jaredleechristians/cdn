@@ -39,7 +39,7 @@ function csv(device,keys){
                 
             });
 
-            var url = "https://things.sfigroup.co.za/api/plugins/telemetry/DEVICE/"+device+"/values/timeseries?keys="+keys+"&startTs=0&endTs="+now+"&interval=60000&agg=NONE&limit=50000";
+            var url = "https://things.sfigroup.co.za/api/plugins/telemetry/DEVICE/"+device+"/values/timeseries?keys="+keys+"&startTs=0&endTs="+now+"&interval=60000&agg=NONE&limit=5000";
             $.get(url, function(data){
 
                 for (var key in data[keys]){
